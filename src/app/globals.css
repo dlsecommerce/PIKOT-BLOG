@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   🎨 DESIGN SYSTEM — Pikot Shop (HSL ONLY)
+------------------------------------------------------------------- */
+
+@layer base {
+  :root {
+    /* Pikot Shop Brand Colors */
+    --background: 0 0% 100%;
+    --foreground: 195 61% 30%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 195 61% 30%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 195 61% 30%;
+    
+    --primary: 195 61% 30%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 195 61% 25%;
+    
+    --secondary: 73 71% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-hover: 73 71% 40%;
+    
+    --accent: 18 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 18 100% 45%;
+    
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 195 61% 30%;
+    
+    --radius: 0.75rem;
+
+    --content-width: 800px;
+    --sidebar-width: 320px;
+
+    --gradient-primary: linear-gradient(135deg, hsl(195 61% 30%), hsl(195 61% 40%));
+    --gradient-secondary: linear-gradient(135deg, hsl(73 71% 45%), hsl(73 71% 55%));
+    --gradient-accent: linear-gradient(135deg, hsl(18 100% 50%), hsl(18 100% 60%));
+
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px rgb(0 0 0 / 0.1);
+    --shadow-glow: 0 0 20px hsl(195 61% 30% / 0.3);
+  }
+}
+
+/* ------------------------------------------------------------------
+   🧱 BASE GLOBAL (Tailwind + Reset)
+------------------------------------------------------------------- */
+
+@layer base {
+  * {
+    /* Compatível com Next + Tailwind v3 (sem @apply) */
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ------------------------------------------------------------------
+   🔧 ELEMENTOS DO TEMPLATE (Vite/React) — compatibilizado
+------------------------------------------------------------------- */
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* ------------------------------------------------------------------
+   🎬 UTILITIES — Animações e efeitos
+------------------------------------------------------------------- */
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-primary/50 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary;
+  }
+}
