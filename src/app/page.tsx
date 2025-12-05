@@ -14,11 +14,88 @@ import { Loader2 } from "lucide-react";
 import { usePosts, usePopularPosts } from "@/hooks/usePosts";
 import { blogPosts } from "@/data/blogPosts";
 
+/* ============================================================
+   ⭐ CARROSSEL – 3 CARDS NO DESKTOP IGUAIS AO PRIMEIRO
+=============================================================== */
+
+function BestSellerCarousel() {
+  const products = [
+    { img: "/kit-platinium.svg", name: "Forno Elétrico e Micro-ondas Platinium Fischer", link: "https://www.pikotshop.com.br/casa-cozinha/eletrodomesticos/fornos-eletricos/kit-platinium-fischer-forno-eletrico-43l-e-micro-ondas-com-grill" },
+    { img: "/kit-fit-line-preto.svg", name: "Forno Elétrico e Micro-ondas Fit Line Fischer", link: "https://www.pikotshop.com.br/casa-cozinha/eletrodomesticos/fornos-eletricos/kit-fit-line-fischer-forno-eletrico-preto-e-micro-ondas-com-descongelar" },
+    { img: "/kit-infinity-cinza.svg", name: "Forno Elétrico e Micro-ondas Infinity Fischer", link: "https://www.pikotshop.com.br/casa-cozinha/eletrodomesticos/fornos-eletricos/kit-infinity-fischer-micro-ondas-inox-grill-e-forno-com-air-fryer-50l" },
+  ];
+
+  return (
+    <div className="w-full py-10">
+      <h2 className="text-center font-display text-3xl font-bold mb-10">
+        CONHEÇA O TOP 3 DA PIKOT SHOP
+      </h2>
+
+      {/* 📱 MOBILE – CARROSSEL */}
+      <div className="lg:hidden grid grid-flow-col auto-cols-[85%] gap-8 overflow-x-auto px-6 no-scrollbar scroll-smooth">
+        {products.map((p, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-2xl p-6 flex flex-col items-center min-h-[460px] w-full"
+          >
+            {/* IMAGEM PADRONIZADA */}
+            <div className="w-full h-64 flex items-center justify-center mb-6">
+              <img src={p.img} alt={p.name} className="max-h-full object-contain" />
+            </div>
+
+            <p className="text-center text-[18px] font-semibold text-black mb-6 leading-tight">
+              {p.name}
+            </p>
+
+            <a
+              href={p.link}
+              target="_blank"
+              className="bg-[#ff4600] text-white font-bold w-full py-3 rounded-full text-center hover:bg-orange-600 transition"
+            >
+              VER NA LOJA
+            </a>
+          </div>
+        ))}
+      </div>
+
+      {/* 💻 DESKTOP — APENAS 3 CARDS IGUAIS AO PRIMEIRO */}
+      <div className="hidden lg:flex justify-center gap-10 px-10">
+        {products.slice(0, 3).map((p, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-2xl p-6 flex flex-col items-center min-h-[460px] w-[330px]"
+          >
+            {/* IMAGEM PADRONIZADA */}
+            <div className="w-full h-64 flex items-center justify-center mb-6">
+              <img src={p.img} alt={p.name} className="max-h-full object-contain" />
+            </div>
+
+            <p className="text-center text-[18px] font-semibold text-black mb-6 leading-tight">
+              {p.name}
+            </p>
+
+            <a
+              href={p.link}
+              target="_blank"
+              className="bg-[#ff4600] text-white font-bold w-full py-3 rounded-full text-center hover:bg-orange-600 transition"
+            >
+              VER NA LOJA
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   ⭐ BLOG PAGE COMPLETA
+=============================================================== */
+
 const BlogPage = () => {
   const { posts: dbPosts, loading } = usePosts(12);
   const { posts: popularPosts } = usePopularPosts(4);
 
-  // fallback para posts estáticos
   const posts = dbPosts.length > 0 ? dbPosts : blogPosts;
   const featuredPost = posts[0];
   const recentPosts = posts.slice(1, 9);
@@ -38,7 +115,11 @@ const BlogPage = () => {
     },
     readTime: post.read_time || "5 min",
     publishedAt: post.published_at || post.created_at,
-    seo: { title: post.title, description: post.excerpt || "", keywords: [] },
+    seo: {
+      title: post.title,
+      description: post.excerpt || "",
+      keywords: [],
+    },
     pikotCta: {
       text: "Ver na Pikot Shop",
       link: "https://www.pikotshop.com.br",
@@ -58,90 +139,20 @@ const BlogPage = () => {
             </div>
           ) : (
             <FeaturedPost
-              post={
-                dbPosts.length > 0
-                  ? convertToCardFormat(featuredPost as any)
-                  : (featuredPost as any)
-              }
+              post={dbPosts.length > 0 ? convertToCardFormat(featuredPost as any) : (featuredPost as any)}
             />
           )}
         </section>
 
-        {/* PRODUTOS MAIS VENDIDOS */}
+        {/* CARROSSEL */}
         <section className="bg-muted/30 py-12">
           <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <h2 className="font-display text-3xl font-bold mb-2">
-                  Produtos Mais Vendidos da Pikot Shop
-                </h2>
-                <p className="text-muted-foreground">
-                  Equipamentos de áudio profissionais com os melhores preços
-                </p>
-              </div>
-              <Button
-                asChild
-                className="bg-accent hover:bg-accent-hover text-accent-foreground hidden md:inline-flex"
-              >
-                <a
-                  href="https://www.pikotshop.com.br"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Ver Todos
-                </a>
-              </Button>
-            </div>
-
-            {/* GRID DE PRODUTOS */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                { name: 'Caixa Ativa 12"', price: "R$ 899,90", desc: "Som potente" },
-                { name: "Baquetas Neon 5A", price: "R$ 49,90", desc: "Cores vibrantes" },
-                { name: "Microfone Sem Fio", price: "R$ 299,90", desc: "Alcance 50m" },
-                { name: "Cabo P10 5m", price: "R$ 39,90", desc: "Alta qualidade" },
-              ].map((item, index) => (
-                <a
-                  key={index}
-                  href="https://www.pikotshop.com.br"
-                  target="_blank"
-                  className="group"
-                >
-                  <div className="bg-card rounded-lg overflow-hidden hover-lift border">
-                    <div className="aspect-square bg-muted flex items-center justify-center">
-                      <span className="text-muted-foreground text-sm">Imagem</span>
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-medium group-hover:text-primary transition-colors">
-                        {item.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {item.desc}
-                      </p>
-                      <p className="font-display font-bold text-lg text-accent">
-                        {item.price}
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
-
-            <Button
-              asChild
-              className="w-full mt-6 md:hidden bg-accent hover:bg-accent-hover text-accent-foreground"
-            >
-              <a href="https://www.pikotshop.com.br" target="_blank">
-                Ver Todos os Produtos
-              </a>
-            </Button>
+            <BestSellerCarousel />
           </div>
         </section>
 
-        {/* ADS */}
         <HorizontalAd />
 
-        {/* BANNERS */}
         <section className="container mx-auto px-4 py-12">
           <BannerCarousel />
         </section>
@@ -152,14 +163,11 @@ const BlogPage = () => {
 
         <HorizontalAd />
 
-        {/* POSTS RECENTES */}
+        {/* POSTS */}
         <section className="container mx-auto px-4 py-12">
           <div className="grid lg:grid-cols-[1fr_320px] gap-8">
-            {/* POSTS */}
             <div>
-              <h2 className="font-display text-3xl font-bold mb-8">
-                Artigos Recentes
-              </h2>
+              <h2 className="font-display text-3xl font-bold mb-8">Artigos Recentes</h2>
 
               {loading ? (
                 <div className="flex items-center justify-center h-64">
@@ -171,11 +179,7 @@ const BlogPage = () => {
                     {recentPosts.map((post) => (
                       <PostCard
                         key={post.id}
-                        post={
-                          dbPosts.length > 0
-                            ? convertToCardFormat(post as any)
-                            : (post as any)
-                        }
+                        post={dbPosts.length > 0 ? convertToCardFormat(post as any) : (post as any)}
                       />
                     ))}
                   </div>
@@ -191,18 +195,14 @@ const BlogPage = () => {
               )}
             </div>
 
-            {/* SIDEBAR */}
             <Sidebar />
           </div>
         </section>
 
-        {/* MAIS LIDOS */}
         {popularPosts.length > 0 && (
           <section className="bg-muted/30 py-12">
             <div className="container mx-auto px-4">
-              <h2 className="font-display text-3xl font-bold mb-8">
-                Mais Lidos
-              </h2>
+              <h2 className="font-display text-3xl font-bold mb-8">Mais Lidos</h2>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {popularPosts.map((post) => (
@@ -215,25 +215,17 @@ const BlogPage = () => {
 
         <HorizontalAd />
 
-        {/* CTA */}
         <section className="bg-gradient-to-br from-primary to-secondary py-16">
           <div className="container mx-auto px-4 text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
               Encontre os Melhores Equipamentos
             </h2>
             <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-              Visite a Pikot Shop e descubra equipamentos de áudio profissionais
-              com os melhores preços do mercado
+              Visite a Pikot Shop e descubra equipamentos de áudio profissionais com os melhores preços.
             </p>
 
-            <Button
-              asChild
-              size="lg"
-              className="bg-accent hover:bg-accent-hover text-accent-foreground"
-            >
-              <a href="https://www.pikotshop.com.br" target="_blank">
-                Visitar Pikot Shop
-              </a>
+            <Button asChild size="lg" className="bg-accent hover:bg-accent-hover text-accent-foreground">
+              <a href="https://www.pikotshop.com.br" target="_blank">Visitar Pikot Shop</a>
             </Button>
           </div>
         </section>

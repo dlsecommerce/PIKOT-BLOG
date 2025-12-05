@@ -8,8 +8,7 @@
 
 @layer base {
   :root {
-    /* Pikot Shop Brand Colors */
-    --background: 0 0% 100%;
+    --background: 180 3% 95.1%;
     --foreground: 195 61% 30%;
     
     --card: 0 0% 100%;
@@ -62,7 +61,6 @@
 
 @layer base {
   * {
-    /* Compatível com Next + Tailwind v3 (sem @apply) */
     border-color: hsl(var(--border));
   }
 
@@ -76,7 +74,7 @@
 }
 
 /* ------------------------------------------------------------------
-   🔧 ELEMENTOS DO TEMPLATE (Vite/React) — compatibilizado
+   🔧 ELEMENTOS
 ------------------------------------------------------------------- */
 
 #root {
@@ -89,7 +87,6 @@
 .logo {
   height: 6em;
   padding: 1.5em;
-  will-change: filter;
   transition: filter 300ms;
 }
 
@@ -101,17 +98,6 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-@keyframes logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
 .card {
   padding: 2em;
 }
@@ -121,21 +107,13 @@
 }
 
 /* ------------------------------------------------------------------
-   🎬 UTILITIES — Animações e efeitos
+   🎬 UTILITIES
 ------------------------------------------------------------------- */
 
 @layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out;
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.6s ease-out;
-  }
-
-  .animate-scale-in {
-    animation: scaleIn 0.4s ease-out;
-  }
+  .animate-fade-in { animation: fadeIn 0.6s ease-out; }
+  .animate-slide-up { animation: slideUp 0.6s ease-out; }
+  .animate-scale-in { animation: scaleIn 0.4s ease-out; }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
@@ -161,19 +139,15 @@
     box-shadow: var(--shadow-lg);
   }
 
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-muted;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-primary/50 rounded-full;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary;
-  }
+  .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+  .custom-scrollbar::-webkit-scrollbar-track { @apply bg-muted; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { @apply bg-primary/50 rounded-full; }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover { @apply bg-primary; }
 }
+
+/* ------------------------------------------------------------------
+   🚫 REMOVE SCROLL HORIZONTAL DO CARROSSEL
+------------------------------------------------------------------- */
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

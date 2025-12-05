@@ -8,6 +8,23 @@ module.exports = {
   ],
   theme: {
     extend: {
+      // -------------------------------
+      // FONTES
+      // -------------------------------
+      fontFamily: {
+        // Fonte global do projeto (Geist Sans)
+        sans: ["var(--font-geist-sans)", "Inter", "system-ui", "sans-serif"],
+
+        // Fonte usada no HEADER e Titles (Montserrat)
+        heading: ["var(--font-heading)", "Montserrat", "Inter", "sans-serif"],
+
+        // Fonte monoespaçada
+        mono: ["var(--font-geist-mono)", "monospace"],
+      },
+
+      // -------------------------------
+      // CORES (seguindo seu globals.css)
+      // -------------------------------
       colors: {
         border: "hsl(var(--border) / <alpha-value>)",
         input: "hsl(var(--input) / <alpha-value>)",
@@ -50,6 +67,9 @@ module.exports = {
         },
       },
 
+      // -------------------------------
+      // RADII
+      // -------------------------------
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
