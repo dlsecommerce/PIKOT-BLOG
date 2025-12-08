@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { PostCard } from "@/components/blog/PostCard";
 
-import { InArticleAd, HorizontalAd, SidebarAd } from "@/components/GoogleAdsense";
+import { InArticleAd, SidebarAd } from "@/components/GoogleAdsense";
 
 import { TableOfContents, addHeadingIds } from "@/components/blog/TableOfContents";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -308,9 +308,6 @@ export default function BlogPostPage() {
                 dangerouslySetInnerHTML={{ __html: secondPart }}
               />
 
-              {/* AD */}
-              <HorizontalAd />
-
               {/* CTA FINAL */}
               <Card className="bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/20 p-8 mt-12">
                 <div className="text-center">
@@ -338,9 +335,7 @@ export default function BlogPostPage() {
                 <h2 className="font-display text-3xl font-bold mb-8">
                   Artigos Relacionados
                 </h2>
-
-                <HorizontalAd />
-
+                
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
                   {relatedPosts
                     .filter((p) => p.slug !== post.slug)

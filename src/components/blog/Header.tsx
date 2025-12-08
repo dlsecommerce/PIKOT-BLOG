@@ -11,7 +11,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 w-full z-50 border-b bg-white backdrop-blur supports-[backdrop-filter]:bg-white/80">
+    <header className="sticky top-0 w-full z-50 border-b bg-white backdrop-blur supports-[backdrop-filter]:bg-white/80 header-shadow">
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
 

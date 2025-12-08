@@ -34,18 +34,7 @@ export const GoogleAdsense = ({
   );
 };
 
-// Componente para banner horizontal
-export const HorizontalAd = () => (
-  <div className="my-8 flex justify-center">
-    <GoogleAdsense 
-      adSlot="1234567890"
-      adFormat="horizontal"
-      style={{ display: 'block', width: '100%', maxWidth: '970px', height: '90px' }}
-    />
-  </div>
-);
-
-// Componente para anúncio no meio do conteúdo
+// 🔥 Componente para anúncio no meio do conteúdo — MANTIDO
 export const InArticleAd = () => (
   <div className="my-6">
     <GoogleAdsense 
@@ -56,7 +45,7 @@ export const InArticleAd = () => (
   </div>
 );
 
-// Componente para sidebar
+// ❌ Sidebar Ad mantido (opcional)
 export const SidebarAd = () => (
   <div className="mb-6">
     <GoogleAdsense 
