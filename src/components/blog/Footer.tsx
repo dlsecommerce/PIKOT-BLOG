@@ -132,7 +132,7 @@ export const Footer = () => {
                 <Image
                   src="/selos/comodo-secure.svg"
                   alt="Comodo Secure"
-                  width={150}
+                  width={130}
                   height={40}
                   className="hover:opacity-80 transition"
                 />

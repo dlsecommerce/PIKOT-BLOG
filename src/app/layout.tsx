@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 // -----------------------------
 //  FONTES
 // -----------------------------
 
-// Fonte global padrão do projeto
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -17,15 +17,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Fonte usada no HEADER (links Montserrat como no print)
 const montserrat = Montserrat({
   variable: "--font-heading",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"], // inclui o LIGHT usado no header
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 // -----------------------------
-//  METADATA (igual ao seu)
+//  METADATA (SEM themeColor)
 // -----------------------------
 
 export const metadata: Metadata = {
@@ -110,7 +109,6 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    nocache: false,
     googleBot: {
       index: true,
       follow: true,
@@ -129,11 +127,6 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/favicon.png", sizes: "180x180", type: "image/png" }],
   },
-
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#020617" },
-  ],
 
   appleWebApp: {
     capable: true,
@@ -155,25 +148,37 @@ export const metadata: Metadata = {
 };
 
 // -----------------------------
+//  VIEWPORT (themeColor CORRIGIDO)
+// -----------------------------
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#020617" },
+  ],
+};
+
+// -----------------------------
 //  ROOT LAYOUT
 // -----------------------------
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="pt-BR">
       <body
         className={`
           ${geistSans.variable}
           ${geistMono.variable}
-          ${montserrat.variable}   /* 🔥 Montserrat funcionando */
+          ${montserrat.variable}
           antialiased
         `}
       >
         {children}
+        <Analytics /> {/* 🔥 ANALYTICS ATIVADO */}
       </body>
     </html>
   );
