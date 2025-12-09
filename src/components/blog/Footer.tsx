@@ -6,7 +6,7 @@ import { Facebook, Instagram, Youtube, Mail, Phone } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="border-t bg-white mt-16">
+    <footer className="border-t bg-white mt-0"> 
       <div className="container mx-auto px-4 py-12">
 
         {/* ===== GRID 4 COLUNAS ===== */}
@@ -37,7 +37,7 @@ export const Footer = () => {
               <a href="https://instagram.com/pikotshop" target="_blank" className="text-muted-foreground hover:text-primary">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="https://youtube.com/pikotshop" target="_blank" className="text-muted-foreground hover:text-primary">
+              <a href="https://youtube.com/@pikotshop" target="_blank" className="text-muted-foreground hover:text-primary">
                 <Youtube className="h-5 w-5" />
               </a>
               <a href="mailto:contato@pikotshop.com.br" className="text-muted-foreground hover:text-primary">
